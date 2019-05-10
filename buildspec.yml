@@ -7,12 +7,6 @@
 # machine and combined with the account and region to form the repository name for ECR.
 image="sagemaker-tf-frauddet-example"
 
-if [ "$image" == "" ]
-then
-    echo "Usage: $0 <image-name>"
-    exit 1
-fi
-
 chmod +x frauddet/train
 chmod +x frauddet/serve
 
