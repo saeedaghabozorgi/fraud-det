@@ -8,8 +8,7 @@ phases:
       - chmod +x frauddet/train
       - chmod +x frauddet/serve
       - account=$(aws sts get-caller-identity --query Account --output text)
-      - region=$(aws configure get region)
-      - region=${region:-us-west-2}
+      - region="us-east-1"
       - fullname="${account}.dkr.ecr.${region}.amazonaws.com/${algorithm_name}:latest"
       - aws ecr describe-repositories --repository-names "${image}" > /dev/null 2>&1
       - $(aws ecr get-login --region ${region} --no-include-email)
