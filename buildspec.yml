@@ -4,12 +4,13 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - image="sagemaker-tf-frauddet-example"
       - chmod +x frauddet/train
       - chmod +x frauddet/serve
       - account=$(aws sts get-caller-identity --query Account --output text)
       - region="us-east-1"
-      - fullname="${account}.dkr.ecr.${region}.amazonaws.com/${algorithm_name}:latest"
+      - fullname="${account}.dkr.ecr.${region}.amazonaws.com/${image}:latest"
       - $(aws ecr get-login --region ${region} --no-include-email)
 
   build:
