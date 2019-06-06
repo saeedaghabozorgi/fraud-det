@@ -52,6 +52,8 @@ def model_fn(features, labels, mode, params):
 
     # Compute loss.
     loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
+    tf.identity(loss, name='loss')
+    tf.summary.scalar('loss', loss)
 
     # Compute evaluation metrics.
     accuracy = tf.metrics.accuracy(labels=labels,
@@ -227,7 +229,7 @@ def train(model_dir, data_dir, train_steps):
 #     eval_spec = tf.estimator.EvalSpec(temp_eval_fn, steps=1, exporters=exporter)
 
 #     tf.estimator.train_and_evaluate(estimator=estimator, train_spec=train_spec, eval_spec=eval_spec)
-
+ 
 
     print(model_dir)
     # Save the model
