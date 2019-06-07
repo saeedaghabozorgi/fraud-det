@@ -20,7 +20,9 @@ import functools
 import os
 import pandas as pd
 import tensorflow as tf
-
+import logging
+logging.basicConfig()
+logger = logging.getLogger(__name__)
 
 INPUT_TENSOR_NAME = "inputs"
 SIGNATURE_NAME = "serving_default"
@@ -61,6 +63,7 @@ def model_fn(features, labels, mode, params):
                                    name='acc_op')
     metrics = {'accuracy': accuracy}
     tf.summary.scalar('accuracy', accuracy[1])
+    logger.warning("testtttttttttttt")
 
     if mode == tf.estimator.ModeKeys.EVAL:
         return tf.estimator.EstimatorSpec(
