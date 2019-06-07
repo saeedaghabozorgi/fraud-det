@@ -23,6 +23,7 @@ import tensorflow as tf
 import logging
 logging.basicConfig()
 logger = logging.getLogger(__name__)
+logger.setLevel(20)
 
 INPUT_TENSOR_NAME = "inputs"
 SIGNATURE_NAME = "serving_default"
@@ -218,7 +219,7 @@ def train(model_dir, data_dir, train_steps):
     
     # Train the Model.
     batch_size = 100
-    classifier.train(input_fn=lambda:train_input_fn(train_x, train_y, batch_size), steps=500)
+    classifier.train(input_fn=lambda:train_input_fn(train_x, train_y, batch_size), steps=train_steps)
     metrics = classifier.evaluate(input_fn=lambda:eval_input_fn(test_x, test_y, batch_size))
     print(metrics)
 #     estimator = tf.estimator.Estimator(model_fn=model_fn, model_dir=model_dir)
