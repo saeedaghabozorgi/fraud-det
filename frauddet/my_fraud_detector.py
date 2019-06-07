@@ -81,6 +81,7 @@ def model_fn(features, labels, mode, params):
 
 
 def train_input_fn(features, labels, batch_size):
+    print("111111")
     """An input function for training"""
     # Convert the inputs to a Dataset.
     dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
@@ -257,10 +258,11 @@ def load_data(data_dir, y_name='Class'):
 
     
 def main(model_dir, data_dir, train_steps):
-    
+    print("111111")
     
     tf.logging.set_verbosity(tf.logging.INFO)
     train(model_dir, data_dir, train_steps)
+    print("111111")
 
 
 if __name__ == '__main__':
