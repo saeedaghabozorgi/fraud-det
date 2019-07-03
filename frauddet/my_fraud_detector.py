@@ -223,6 +223,7 @@ def train(model_dir, data_dir, train_steps):
     classifier.train(input_fn=lambda:train_input_fn(train_x, train_y, batch_size), steps=train_steps)
     metrics = classifier.evaluate(input_fn=lambda:eval_input_fn(test_x, test_y, batch_size))
     print(metrics)
+    print("test for fatal error", file=sys.stderr)
 #     estimator = tf.estimator.Estimator(model_fn=model_fn, model_dir=model_dir)
 
 #     temp_input_fn = functools.partial(train_input_fn, data_dir)
