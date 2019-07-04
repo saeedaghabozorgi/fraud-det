@@ -24,7 +24,7 @@ import logging
 import sys
 logging.basicConfig()
 logger = logging.getLogger(__name__)
-logger.setLevel(20)
+#logger.setLevel(20)
 
 INPUT_TENSOR_NAME = "inputs"
 SIGNATURE_NAME = "serving_default"
