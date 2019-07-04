@@ -82,7 +82,7 @@ def model_fn(features, labels, mode, params):
 
 
 def train_input_fn(features, labels, batch_size):
-    
+    print('training: ' , file=sys.stderr)
     """An input function for training"""
     # Convert the inputs to a Dataset.
     dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
@@ -96,6 +96,7 @@ def train_input_fn(features, labels, batch_size):
 
 
 def eval_input_fn(features, labels, batch_size):
+    print('Evaluation: ' , file=sys.stderr)
     """An input function for evaluation or prediction"""
     features=dict(features)
     if labels is None:
@@ -200,6 +201,7 @@ def serving_input_receiver_fn(): # it is working
 
 def train(model_dir, data_dir, train_steps):
     # Fetch the data
+    print('training: ' , file=sys.stderr)
     (train_x, train_y), (test_x, test_y) = load_data(data_dir)
 
     # Feature columns describe how to use the input.
