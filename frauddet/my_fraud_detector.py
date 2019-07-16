@@ -32,6 +32,7 @@ SIGNATURE_NAME = "serving_default"
 my_feature_columns=[]
 
 def model_fn(features, labels, mode, params):
+    logger.info("Loading Cifar10 dataset")
     """DNN with three hidden layers and learning_rate=0.1."""
     # Create three fully connected layers.
     net = tf.feature_column.input_layer(features, params['feature_columns'])
@@ -65,7 +66,8 @@ def model_fn(features, labels, mode, params):
                                    name='acc_op')
     metrics = {'accuracy': accuracy}
     tf.summary.scalar('accuracy', accuracy[1])
-    logger.warning("testtttttttttttt")
+    logger.warning("test")
+    logger.debug("Distributed training")
 
     if mode == tf.estimator.ModeKeys.EVAL:
         return tf.estimator.EstimatorSpec(
@@ -83,6 +85,8 @@ def model_fn(features, labels, mode, params):
 
 def train_input_fn(features, labels, batch_size):
     print('training: ' , file=sys.stderr)
+    logger.debug("Distributed training")
+    logger.info("Loading Cifar10 dataset")
     """An input function for training"""
     # Convert the inputs to a Dataset.
     dataset = tf.data.Dataset.from_tensor_slices((dict(features), labels))
@@ -97,6 +101,7 @@ def train_input_fn(features, labels, batch_size):
 
 def eval_input_fn(features, labels, batch_size):
     print('Evaluation: ' , file=sys.stderr)
+    logger.info("Loading Cifar10 dataset")
     """An input function for evaluation or prediction"""
     features=dict(features)
     if labels is None:
@@ -202,6 +207,8 @@ def serving_input_receiver_fn(): # it is working
 def train(model_dir, data_dir, train_steps):
     # Fetch the data
     print('training: ' , file=sys.stderr)
+    logger.info("Loading Cifar10 dataset")
+    logger.debug("Distributed training")
     (train_x, train_y), (test_x, test_y) = load_data(data_dir)
 
     # Feature columns describe how to use the input.
@@ -246,6 +253,8 @@ def train(model_dir, data_dir, train_steps):
 
 
 def load_data(data_dir, y_name='Class'):
+    logger.debug("Distributed training")
+    logger.info("Loading Cifar10 dataset")
     """Returns the iris dataset as (train_x, train_y), (test_x, test_y)."""
     #train_path, test_path = maybe_download()
     with tf.device('/cpu:0'):
@@ -271,7 +280,9 @@ def main(model_dir, data_dir, train_steps):
 
 
 if __name__ == '__main__':
+    logger.debug("Distributed training")
     args_parser = argparse.ArgumentParser()
+    logger.info("Loading Cifar10 dataset")
     # For more information:
     # https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-training-algo.html
     args_parser.add_argument(
