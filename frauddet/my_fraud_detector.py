@@ -99,6 +99,7 @@ def train_input_fn(features, labels, batch_size):
 
 
 
+
 def eval_input_fn(features, labels, batch_size):
     print('Evaluation: ' , file=sys.stderr)
     logger.info("Loading Cifar10 dataset")
